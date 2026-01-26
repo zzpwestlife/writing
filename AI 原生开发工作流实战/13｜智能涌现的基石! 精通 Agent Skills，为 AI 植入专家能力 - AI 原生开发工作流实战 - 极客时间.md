@@ -8,7 +8,7 @@
 
 然而, 一个深刻的矛盾也随之浮现:&#x20;
 
-> "随着模型能力的提升, 我们现在可以构建出能够与完整计算环境交互的 通用智能体 …… 但当这些智能体变得越来越强大时, 我们就需要一种 <span style="color: inherit; background-color: rgba(254,212,164,0.8)">可组合、可扩展、可移植</span> 的方式, 来为它们装备 <span style="color: inherit; background-color: rgba(254,212,164,0.8)">领域特定的专业知识</span>. "
+> "随着模型能力的提升, 我们现在可以构建出能够与完整计算环境交互的 通用智能体 …… 但当这些智能体变得越来越强大时, 我们就需要一种 可组合、可扩展、可移植 的方式, 来为它们装备 领域特定的专业知识. "
 
 
 
@@ -40,9 +40,9 @@
 
 这种从 "命令" 到 "声明" 的转变, 引发了调用模式的根本性变革:&#x20;
 
-* <span style="color: inherit; background-color: rgba(254,212,164,0.8)">Slash Commands 是用户调用的</span>.  AI 处于被动等待状态, 只有当你明确输入 /command 时, 它才会去执行. 
+* Slash Commands 是用户调用的.  AI 处于被动等待状态, 只有当你明确输入 /command 时, 它才会去执行. 
 
-* <span style="color: inherit; background-color: rgba(254,212,164,0.8)">Agent Skills 是模型调用的</span>.  AI 在接收到你的自然语言任务后, 会 主动地、自主地 在它的 "技能库" 中进行扫描, 寻找与当前任务最匹配的 Skill, 然后加载并执行它. 
+* Agent Skills 是模型调用的.  AI 在接收到你的自然语言任务后, 会 主动地、自主地 在它的 "技能库" 中进行扫描, 寻找与当前任务最匹配的 Skill, 然后加载并执行它. 
 
 
 
@@ -124,13 +124,13 @@ pdf-processing-skill/
 
   * 用途: 封装你个人的高频习惯、私人脚本工具集. 例如,  `summarize-git-diff`、 `translate-to-english`. 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">Claude Code 在启动时, 会自动扫描这两个目录, 构建起它可用的 "技能库"</span>. 现在, 我们已经清晰地看到了一个 Skill 的 "物理形态". 接下来, 让我们深入其内部, 探索那个让这一切高效运转的神奇机制. 
+Claude Code 在启动时, 会自动扫描这两个目录, 构建起它可用的 "技能库". 现在, 我们已经清晰地看到了一个 Skill 的 "物理形态". 接下来, 让我们深入其内部, 探索那个让这一切高效运转的神奇机制. 
 
 
 
 ## "渐进式披露": 解决 AI 上下文瓶颈的优雅之道
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">Agent Skills 的设计哲学, 可以用四个词来概括: 可组合 (Composable) 、可移植 (Portable) 、高效 (Efficient) 、强大 (Powerful) . 而支撑这一切的核心机制, 是一种被称为 "渐进式披露 (Progressive Disclosure) " 的信息加载策略. </span>
+Agent Skills 的设计哲学, 可以用四个词来概括: 可组合 (Composable) 、可移植 (Portable) 、高效 (Efficient) 、强大 (Powerful) . 而支撑这一切的核心机制, 是一种被称为 "渐进式披露 (Progressive Disclosure) " 的信息加载策略. 
 
 
 
@@ -154,7 +154,7 @@ pdf-processing-skill/
 
 那么, Skills 又是如何实现可组合性与可移植性的呢?
 
-* 可移植性  (Portable) : 源于其标准化的 文件夹结构. 就像之前所讲解的那样, <span style="color: inherit; background-color: rgba(254,212,164,0.8)">一个 Skill 本质上就是一个自包含的文件夹, 你可以轻松地在不同项目、不同团队成员之间通过 Git 进行复制和共享, 甚至跨 Claude Code、Claude API 等不同产品使用.  Build once, use everywhere.</span>
+* 可移植性  (Portable) : 源于其标准化的 文件夹结构. 就像之前所讲解的那样, 一个 Skill 本质上就是一个自包含的文件夹, 你可以轻松地在不同项目、不同团队成员之间通过 Git 进行复制和共享, 甚至跨 Claude Code、Claude API 等不同产品使用.  Build once, use everywhere.
 
 * 可组合性  (Composable) : 源于 AI 模型的 自主协调能力. 如果一个复杂任务同时触及多个技能的 description, AI 能够像一个项目经理一样, 先后或交错地调用这些技能, 共同完成最终任务. 
 
@@ -260,7 +260,7 @@ allowed-tools: Read, Grep, Glob
 
 1. 从 "被动执行" 到 "主动思考": Slash Command 的内容是: "请审查 @$1 …", 它是一个直接的命令. 而 Skill 的内容是: "本技能专用于审查… 当你决定使用本技能时, 请遵循以下步骤…", 它在向 AI 描述一种能力, 并 编程 AI 在使用该能力时的思考和行动流程. 
 
-2. <span style="color: inherit; background-color: rgba(254,212,164,0.8)">description 的魔力: 新增的 description 字段是关键</span>.  Use this skill whenever a user asks to review Go code... 这部分, 就是在为 AI 的 "自主发现" 机制, 提供最关键的 "索引关键词". 
+2. description 的魔力: 新增的 description 字段是关键.  Use this skill whenever a user asks to review Go code... 这部分, 就是在为 AI 的 "自主发现" 机制, 提供最关键的 "索引关键词". 
 
 3. 更强的流程控制: Skill 中的 "执行步骤" 和 "输出格式" 部分, 比 Slash Command 中的指令更详细、更具强制性. 这是因为当 AI 自主调用一个能力时, 我们需要比用户手动调用时, 给予它更严格的流程约束, 以保证输出的稳定性和可靠性. 
 
@@ -372,13 +372,13 @@ allowed-tools: Read, Grep, Glob
 
 
 
-我们成功了！我们不再需要记住并输入一个精确的指令, AI 已经学会了 自主地、智能地 从它的 "技能库" 中, 为我们的任务匹配并执行最合适的解决方案. 
+我们成功了! 我们不再需要记住并输入一个精确的指令, AI 已经学会了 自主地、智能地 从它的 "技能库" 中, 为我们的任务匹配并执行最合适的解决方案. 
 
 
 
 ## 深度剖析: 从官方 PDF Skill 示例看高级模式
 
-我们的 go-code-reviewer 是一个简洁的单文件 Skill. <span style="color: inherit; background-color: rgba(254,212,164,0.8)">但 Skills 的真正威力, 在于它们能够封装包含 多个辅助文档 和 可执行脚本 的复杂能力. </span>
+我们的 go-code-reviewer 是一个简洁的单文件 Skill. 但 Skills 的真正威力, 在于它们能够封装包含 多个辅助文档 和 可执行脚本 的复杂能力. 
 
 为了理解这种高级模式, 让我们来剖析一下 Anthropic 官方提供的 document-skills-pdf 这个生产级的 Skill. 它的目标是让 Claude 具备处理 PDF 文件的超能力. 
 
@@ -412,7 +412,7 @@ pdf/
 
 4. 最关键的一点: forms.md、 reference.md 和那些 Python 脚本, 只有在被明确 "提及" 时, 才会被加载到上下文中. AI 在处理一个简单的文本提取任务时, 完全不会知道 forms.md 的存在, 从而极大地节省了 Token. 
 
-这个官方示例, 为我们揭示了设计复杂 Skill 的最佳实践: <span style="color: inherit; background-color: rgba(254,212,164,0.8)">将你的专业知识, 像写一本结构清晰的书一样组织起来.  SKILL.md 是 "目录", 辅助文档是 "章节", 而可执行脚本, 则是可以随时取用的 "工具箱". </span>
+这个官方示例, 为我们揭示了设计复杂 Skill 的最佳实践: 将你的专业知识, 像写一本结构清晰的书一样组织起来.  SKILL.md 是 "目录", 辅助文档是 "章节", 而可执行脚本, 则是可以随时取用的 "工具箱". 
 
 
 
@@ -424,7 +424,7 @@ pdf/
 
 ### 保持技能的 "单一职责"
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">这可能是最重要的第一原则. 一个好的 Skill, 应该像一个好的 Go 函数一样, 只做好一件事. </span>
+这可能是最重要的第一原则. 一个好的 Skill, 应该像一个好的 Go 函数一样, 只做好一件事. 
 
 反模式 (Too Broad) : 创建一个名为 document-processing 的巨大 Skill, 里面包含了处理 PDF、Word、Markdown 的所有逻辑. 
 
@@ -444,7 +444,7 @@ pdf/
 
 ### 精心撰写 "技能广告语"
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">description 字段是 AI 发现你技能的 唯一入口. 你必须像一个顶级的广告文案写手一样, 精心打磨它. 一个好的 description 必须清晰地回答两个问题: "这个技能能做什么?" 和 "什么时候该用它?". </span>
+description 字段是 AI 发现你技能的 唯一入口. 你必须像一个顶级的广告文案写手一样, 精心打磨它. 一个好的 description 必须清晰地回答两个问题: "这个技能能做什么?" 和 "什么时候该用它?". 
 
 
 
@@ -462,7 +462,7 @@ Skills 并非一蹴而就. 一个真正好用的 Skill, 是在团队的实际使
 
 * 主动反馈: "我希望 AI 帮我做 X, 但它没有调用 Y 技能, 是不是 Y 技能的 description 不够好?"
 
-* <span style="color: inherit; background-color: rgba(254,212,164,0.8)">共同建设: 在 </span>`SKILL.md`<span style="color: inherit; background-color: rgba(254,212,164,0.8)"> 中, 像维护代码一样, 通过注释或专门的章节, 记录下使用的 "坑" 和成功的 "模式". </span>
+* 共同建设: 在 `SKILL.md` 中, 像维护代码一样, 通过注释或专门的章节, 记录下使用的 "坑" 和成功的 "模式". 
 
 * 版本化文档: 为你的 `SKILL.md` 添加版本历史. 这对于团队共享的技能至关重要, 它能让成员清晰地了解一个技能的能力边界在何时发生了变化. 
 
@@ -504,7 +504,7 @@ Skills 并非一蹴而就. 一个真正好用的 Skill, 是在团队的实际使
 
 2. 请为其中 一个 你认为最重要的技能,  精心撰写 description. 思考一下, 你应该在这个描述里放入哪些关键词, 才能让 AI 在最恰当的时机, "想起" 并激活这个 Skill?
 
-欢迎在评论区分享你的 "技能系统" 设计！这个练习将考验你是否真正掌握了将复杂工作流, 拆解为 AI 可发现、可组合的 "能力单元" 的思维方式. 如果你觉得这节课的内容对你有帮助的话, 也欢迎你分享给需要的朋友, 我们下节课再见！
+欢迎在评论区分享你的 "技能系统" 设计! 这个练习将考验你是否真正掌握了将复杂工作流, 拆解为 AI 可发现、可组合的 "能力单元" 的思维方式. 如果你觉得这节课的内容对你有帮助的话, 也欢迎你分享给需要的朋友, 我们下节课再见! 
 
 
 

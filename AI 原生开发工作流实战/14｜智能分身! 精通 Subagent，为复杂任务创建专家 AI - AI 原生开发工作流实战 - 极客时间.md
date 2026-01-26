@@ -18,13 +18,13 @@
 
 2. 安全审查: 这需要 AI 扮演一个 "安全审计员" 的角色. 它的思维模式应该是保守的、审慎的, 会质疑每一个外部输入, 并告诉你 unsafe 包很危险. 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">当你让 同一个 </span><span style="color: inherit; background-color: rgba(254,212,164,0.8)">AI Agent</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)"> 同时扮演这两个 "精神分裂" 的角色时, 混乱就产生了. </span>AI 可能会在两个目标之间摇摆不定, 或者因为上下文过于混杂而 "忘记" 了核心任务, 最终的输出质量往往难以保证. 
+当你让 同一个 AI Agent 同时扮演这两个 "精神分裂" 的角色时, 混乱就产生了. AI 可能会在两个目标之间摇摆不定, 或者因为上下文过于混杂而 "忘记" 了核心任务, 最终的输出质量往往难以保证. 
 
 
 
 单一 Agent 模型是一个 "全能通才", 但在处理需要深度、专注、甚至人格冲突的多个专业领域问题时, 力不从心. 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">我们需要的, 不再是一个试图精通所有事情的 "超级个体", 而是一个能够协同作战的 "专家团队". 这, 正是我们今天要精通的终极能力扩展方式 —— Subagent  (智能分身) 机制. </span>
+我们需要的, 不再是一个试图精通所有事情的 "超级个体", 而是一个能够协同作战的 "专家团队". 这, 正是我们今天要精通的终极能力扩展方式 —— Subagent  (智能分身) 机制. 
 
 今天这一讲, 我们将学习如何为 AI 创建拥有独立上下文的 "专家分身", 让它们协同作战, 解决更复杂的难题. 你将学会如何从一个 "AI 项目经理" 的角色, 进化为一个能够构建和指挥 "AI 专家团队" 的 "首席技术官  (CTO) ". 
 
@@ -34,7 +34,7 @@
 
 要真正组建并指挥这样一支高效的 "AI 专家团队", 我们必须先理解为何需要它, 以及它背后的组织原则是什么. 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">单一 Agent 模型的根本瓶颈: 对于 开放式的、路径不确定的复杂问题  (比如技术研究、大规模</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)">重构</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)">) , 依赖单个</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)">智能体</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)"> "一条路走到黑" 的线性探索, 效率低下且容易陷入局部最优. </span>
+单一 Agent 模型的根本瓶颈: 对于 开放式的、路径不确定的复杂问题  (比如技术研究、大规模重构) , 依赖单个智能体 "一条路走到黑" 的线性探索, 效率低下且容易陷入局部最优. 
 
 现实世界中的专家团队是如何解决这类问题的?他们采用 并行处理 和 关注点分离. 一个团队会分解任务, 让数据库专家、前端专家和安全专家同时在各自的领域进行探索, 最后再将各自的结论汇总. 
 
@@ -131,9 +131,9 @@ It defines the agent's personality, goals, and operational procedures.
 
 让我们来逐一解析 Frontmatter 中的每一个关键 "基因":&#x20;
 
-* name  (必需) : 这是 Subagent 的唯一 ID, 也是主 Agent 调用它时使用的名字. <span style="color: inherit; background-color: rgba(254,212,164,0.8)">它必须是小写字母和连字符的组合, 例如 go-code-security-reviewer</span>. 
+* name  (必需) : 这是 Subagent 的唯一 ID, 也是主 Agent 调用它时使用的名字. 它必须是小写字母和连字符的组合, 例如 go-code-security-reviewer. 
 
-* description  (必需) : <span style="color: inherit; background-color: rgba(254,212,164,0.8)">这是整个 Subagent 定义中最至关重要的部分</span>！ description 是主 Agent 用来自主发现和决定是否委托这个 Subagent 的核心依据. AI 会通过语义匹配, 将用户的任务需求与所有可用 Subagent 的 description 进行比较. 一个高质量的 description 必须有:&#x20;
+* description  (必需) : 这是整个 Subagent 定义中最至关重要的部分!  description 是主 Agent 用来自主发现和决定是否委托这个 Subagent 的核心依据. AI 会通过语义匹配, 将用户的任务需求与所有可用 Subagent 的 description 进行比较. 一个高质量的 description 必须有:&#x20;
 
   * 清晰说明能力: 它能做什么? (e.g., "Review Go code for security vulnerabilities") 
 
@@ -155,7 +155,7 @@ It defines the agent's personality, goals, and operational procedures.
 
   * 如果省略这个字段, Claude Code 会使用一个默认的 Subagent 模型 (通常是 sonnet ) . 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">如果说 Frontmatter 是 Subagent 的 "基因档案", 那么 Markdown 正文就是它的 "灵魂" 和 "操作手册". 这段内容会成为 Subagent 的 System Prompt, 决定了它的 "人格"、专业知识、工作流程和输出格式. 一段精心编写的 System Prompt, 是确保 Subagent 能够高质量、稳定地完成专业任务的根本保障. </span>
+如果说 Frontmatter 是 Subagent 的 "基因档案", 那么 Markdown 正文就是它的 "灵魂" 和 "操作手册". 这段内容会成为 Subagent 的 System Prompt, 决定了它的 "人格"、专业知识、工作流程和输出格式. 一段精心编写的 System Prompt, 是确保 Subagent 能够高质量、稳定地完成专业任务的根本保障. 
 
 
 
@@ -181,7 +181,7 @@ It defines the agent's personality, goals, and operational procedures.
 
 
 
-此外, 在上一讲, 我们已经从调用模式的维度, 系统性地对比了 Slash Commands (用户调用) 、Agent Skills (AI 自主发现) 和 Subagents (AI 主动委托) . 现在, 当我们聚焦于 Subagent 时, 必须抓住它与前两者最根本、最核心的区别, 那就是 —— 独立的上下文窗口 (Isolated Context) . <span style="color: inherit; background-color: rgba(254,212,164,0.8)">Subagent 的核心价值在于 上下文隔离 和 深度专注, 这是其他两者无法替代的. </span>
+此外, 在上一讲, 我们已经从调用模式的维度, 系统性地对比了 Slash Commands (用户调用) 、Agent Skills (AI 自主发现) 和 Subagents (AI 主动委托) . 现在, 当我们聚焦于 Subagent 时, 必须抓住它与前两者最根本、最核心的区别, 那就是 —— 独立的上下文窗口 (Isolated Context) . Subagent 的核心价值在于 上下文隔离 和 深度专注, 这是其他两者无法替代的. 
 
 理解了 Subagent 的构造原理、管理方式和独特定位, 我们现在就具备了亲手创建第一个专家分身的全部理论知识. 接下来, 让我们进入激动人心的实战环节, 为我们的 issue2md 项目, 创建一个真正能解决问题的 "Go 代码安全审查员". 
 
@@ -254,7 +254,7 @@ Provide your findings in order of severity (Critical, High, Medium, Low). For ea
 
 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">接下来, 进入 description 信息配置页, 这是 最至关重要 的一步！ description 是主 Agent 用来 自主发现和决定是否委托 这个 Subagent 的核心依据. 它必须清晰、准确, 并包含丰富的 "触发关键词": </span>
+接下来, 进入 description 信息配置页, 这是 最至关重要 的一步!  description 是主 Agent 用来 自主发现和决定是否委托 这个 Subagent 的核心依据. 它必须清晰、准确, 并包含丰富的 "触发关键词": 
 
 ![](images/14_image_9.png)
 
@@ -296,7 +296,7 @@ An expert Go security code reviewer. Use this agent to review Go (Golang) code f
 
 ### 隐式调用: 让 AI 自主决策
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">这是 Subagent 最 "智能" 的用法. 得益于我们精心编写的 description, 主 Agent 可以在对话中自主决策, 将任务委托出去. </span>
+这是 Subagent 最 "智能" 的用法. 得益于我们精心编写的 description, 主 Agent 可以在对话中自主决策, 将任务委托出去. 
 
 
 
@@ -332,11 +332,11 @@ Subagent 真正的威力, 体现在处理需要多种专业能力协同的复杂
 
 让我们回到本讲开头的那个复杂任务:&#x20;
 
-> <span style="color: inherit; background-color: rgba(254,212,164,0.8)">First, use the performance-optimizer agent to refactor the @internal/billing module for speed.</span>
+> First, use the performance-optimizer agent to refactor the @internal/billing module for speed.
 >
-> <span style="color: inherit; background-color: rgba(254,212,164,0.8)">After that, use the go-code-security-reviewer agent to perform a security audit on the refactored code.</span>
+> After that, use the go-code-security-reviewer agent to perform a security audit on the refactored code.
 >
-> <span style="color: inherit; background-color: rgba(254,212,164,0.8)">Finally, use the test-coverage-enhancer agent to ensure the new code has adequate test coverage.</span>
+> Finally, use the test-coverage-enhancer agent to ensure the new code has adequate test coverage.
 
 在这个指令中, 你不再是一个简单的提问者, 而是一个 工作流的编排者. 你定义了一个由三个专家 (性能、安全、QA) 依次参与的、自动化的、高质量的交付流水线. 这正是构建 多智能体系统 的雏形. 
 
@@ -350,11 +350,11 @@ Subagent 真正的威力, 体现在处理需要多种专业能力协同的复杂
 
 
 
-### <span style="color: inherit; background-color: rgb(251,191,188)">先让 AI 创造, 再由你升华</span>
+### <span style="color: inherit; background-color: rgb(251,191,188)">先让 AI 创造, 再由你升华
 
 像我们上面示例中从一张白纸开始编写一个完美的 Subagent System Prompt 是一件困难的事. 最佳的起点, 是 利用 AI 来创造 AI. 
 
-* 启动流程: 使用 /agents 命令, <span style="color: inherit; background-color: rgba(254,212,164,0.8)">在 "Create New Agent" 页面选择 "Generate with Claude", 然后用自然语言向 Claude Code 描述你想要的专家角色</span>. 例如: "<span style="color: rgb(216,57,49); background-color: inherit">我需要一个能审查 Go 代码并发问题的专家, 它应该懂 goroutine 和 channel, 并且熟悉 Go 的内存模型</span>. "
+* 启动流程: 使用 /agents 命令, 在 "Create New Agent" 页面选择 "Generate with Claude", 然后用自然语言向 Claude Code 描述你想要的专家角色. 例如: "<span style="color: rgb(216,57,49); background-color: inherit">我需要一个能审查 Go 代码并发问题的专家, 它应该懂 goroutine 和 channel, 并且熟悉 Go 的内存模型. "
 
 * 迭代优化: Claude Code 会为你生成一个包含 name 、 description 、 tools 和初始 System Prompt 的完整草稿. 这个草稿就是你的 "坚实地基". 在此之上, 你可以结合自己的领域知识, 不断地对其进行迭代、修正和增强, 最终打磨出真正属于你和你的团队的 "私人专家". 
 
@@ -362,9 +362,9 @@ Subagent 真正的威力, 体现在处理需要多种专业能力协同的复杂
 
 ### 保持专注, 拒绝 "万能"
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">Subagent 的核心价值在于其 专业性, 而非通用性. 抵制住创造一个 "什么都能干" 的超级 Agent 的诱惑. </span>
+Subagent 的核心价值在于其 专业性, 而非通用性. 抵制住创造一个 "什么都能干" 的超级 Agent 的诱惑. 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">一个 Subagent 应该遵循 "单一职责原则", 只负责一件定义清晰、边界明确的事情. 例如, 与其创建一个宽泛的 "代码质量保证" Agent, 不如将其拆分为三个专注的 Agent: go-security-reviewer  (安全审查员) 、 performance-optimizer  (性能优化师) 和 test-coverage-enhancer  (测试覆盖率提升师) . </span>
+一个 Subagent 应该遵循 "单一职责原则", 只负责一件定义清晰、边界明确的事情. 例如, 与其创建一个宽泛的 "代码质量保证" Agent, 不如将其拆分为三个专注的 Agent: go-security-reviewer  (安全审查员) 、 performance-optimizer  (性能优化师) 和 test-coverage-enhancer  (测试覆盖率提升师) . 
 
 专注的 Subagent 不仅性能更好 (上下文更干净) , 行为也更可预测. 这使得主 Agent 在进行任务委托时, 能够做出更精准的选择. 
 
@@ -440,7 +440,7 @@ Project 级的 Subagent (即存放在 `./.claude/agents/` 中的) 是你团队�
 
 你 (作为主 Orchestrator) 会如何 编排 它们的工作顺序?
 
-欢迎在评论区分享你的 "多智能体迁移方案"！如果你觉得这节课的内容对你有帮助的话, 也欢迎你分享给需要的朋友, 我们下节课再见！
+欢迎在评论区分享你的 "多智能体迁移方案"! 如果你觉得这节课的内容对你有帮助的话, 也欢迎你分享给需要的朋友, 我们下节课再见! 
 
 
 

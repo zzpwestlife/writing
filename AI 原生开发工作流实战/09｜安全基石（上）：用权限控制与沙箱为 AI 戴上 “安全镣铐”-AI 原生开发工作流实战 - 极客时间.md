@@ -20,7 +20,7 @@
 
 * 统计的随机性: 大模型的本质是基于概率生成内容. 即便在相同的输入下, 它的输出也可能存在细微的差异. 这种随机性在带来创造力的同时, 也引入了不可预测的风险. 
 
-正因为这些风险的存在,  我们对 AI Agent 的 "信任", 绝不能建立在 "它很聪明, 不会犯错" 的主观期待之上, 而必须建立在一套 "即便它犯错, 也无法造成破坏" 的客观技术保障体系之上. Claude Code 的整个安全哲学, 就建立在这样一种务实而审慎的思想之上: <span style="color: inherit; background-color: rgba(254,212,164,0.8)">默认不信任, 逐步授权, 全程监督</span>.  它通过权限体系与沙箱机制这两大支柱来实现这一点. 
+正因为这些风险的存在,  我们对 AI Agent 的 "信任", 绝不能建立在 "它很聪明, 不会犯错" 的主观期待之上, 而必须建立在一套 "即便它犯错, 也无法造成破坏" 的客观技术保障体系之上. Claude Code 的整个安全哲学, 就建立在这样一种务实而审慎的思想之上: 默认不信任, 逐步授权, 全程监督.  它通过权限体系与沙箱机制这两大支柱来实现这一点. 
 
 
 
@@ -46,7 +46,7 @@ Claude Code 的权限体系, 是其安全模型的 第一道、也是最重要�
 
 > 【重要】 default 模式是我们最常用的. 它在安全和效率之间取得了最佳平衡, 既不像 plan 模式那样完全只说不做, 也不像 acceptEdits 那样自动修改文件, 而是将每一个高风险决策都交由你来把控. 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">你可以通过 Shift+Tab 快捷键在启动的 Claude Code 会话中循环, 在 default 、 plan 和 acceptEdits 模式间切换: </span>
+你可以通过 Shift+Tab 快捷键在启动的 Claude Code 会话中循环, 在 default 、 plan 和 acceptEdits 模式间切换: 
 
 ![](images/09_image_2.png)
 
@@ -119,11 +119,11 @@ Read / Edit / Write: 控制文件访问, 你可以使用类似 `.gitignore` 的�
 
 3. `~/path`: 相对于 用户主目录. 例如: Deny(Read(\~/.ssh/id\_rsa)) 会禁止 AI 读取你的 SSH 私钥. 
 
-4. `//path`: 文件系统的绝对路径. 例如: Deny(Read(//etc/passwd)) 会禁止 AI 读取系统的密码文件 /etc/passwd. 请务必区分, 错误的路径模式可能会导致你的安全规则失效！
+4. `//path`: 文件系统的绝对路径. 例如: Deny(Read(//etc/passwd)) 会禁止 AI 读取系统的密码文件 /etc/passwd. 请务必区分, 错误的路径模式可能会导致你的安全规则失效! 
 
 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">Bash: 控制命令执行  Bash 工具是 AI 能力最强的 "武器", 也是风险最高的</span>. Claude Code 为其设计了 基于前缀匹配 的规则. 
+Bash: 控制命令执行  Bash 工具是 AI 能力最强的 "武器", 也是风险最高的. Claude Code 为其设计了 基于前缀匹配 的规则. 
 
 ```json
 {
@@ -173,7 +173,7 @@ WebFetch 和 MCP: 控制外部连接, 你可以为可信的网络域和 MCP 服�
 
 你可能会问, 既然我们在上面已经为 AI 制定了如此精细的 "法律" (权限体系) , 为什么还需要为它建造一个 "监狱" (沙箱) 呢?
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">答案是: 权限体系防范的是 "已知的未知", 而沙箱防范的是 "未知的未知". </span>权限体系依赖于我们预先定义的规则, 但如果 AI 通过一个我们允许的、看似无害的命令 (比如运行一个被恶意篡改的 npm 脚本) 找到了规则的漏洞, 或者利用了 Bash 前缀匹配规则的局限性呢?
+答案是: 权限体系防范的是 "已知的未知", 而沙箱防范的是 "未知的未知". 权限体系依赖于我们预先定义的规则, 但如果 AI 通过一个我们允许的、看似无害的命令 (比如运行一个被恶意篡改的 npm 脚本) 找到了规则的漏洞, 或者利用了 Bash 前缀匹配规则的局限性呢?
 
 这正是沙箱的用武之地. 它不再是应用层面的规则检查, 而是深入到 操作系统 (OS) 层面, 为 AI 的所有高风险操作, 构建了一个坚不可摧的 "数字囚笼". 
 
@@ -210,7 +210,7 @@ sudo apt-get update && sudo apt-get install -y bubblewrap socat
 
 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">选项 2:  Sandbox BashTool, with regular permissions  (推荐, 最安全) </span>
+选项 2:  Sandbox BashTool, with regular permissions  (推荐, 最安全) 
 
 含义: 启用沙箱, 并且所有 Bash 命令的执行, 都 严格遵循 我们在上一节学习的 permissions 体系. 这意味着, 即使一个 Bash 命令在沙箱的安全边界内, 如果它没有命中 allow 规则, Claude Code 依然会弹窗向你请求批准. 
 
@@ -264,7 +264,7 @@ sudo apt-get update && sudo apt-get install -y bubblewrap socat
 
 ### "安全 YOLO 模式": 沙箱与 bypassPermissions 的终极结合
 
-现在, 我们可以揭晓 bypassPermissions  (YOLO 模式) 的唯一正确且极其强大的用法了 —— 将其与一个严格配置的沙箱结合. 这个流程被称为 <span style="color: inherit; background-color: rgba(254,212,164,0.8)">"安全 YOLO 模式", 它特别适合执行那些高度重复、机械化的、边界清晰的自动化任务. </span>
+现在, 我们可以揭晓 bypassPermissions  (YOLO 模式) 的唯一正确且极其强大的用法了 —— 将其与一个严格配置的沙箱结合. 这个流程被称为 "安全 YOLO 模式", 它特别适合执行那些高度重复、机械化的、边界清晰的自动化任务. 
 
 
 
@@ -390,7 +390,7 @@ sandbox 部分 (执法)
 
 3. 为了让 npm install 能够在网络隔离的沙箱中成功运行, 你需要在 permissions 的 allow 中添加哪条 WebFetch 规则? (提示: npm 的默认源地址是什么?) 
 
-欢迎在评论区分享你的完整 settings.json 配置方案和设计思路. 这个练习将帮助你将本讲学到的两大安全支柱, 融会贯通地应用到真实的工程场景中. 如果你有所收获, 也欢迎你分享给其他朋友, 我们下节课再见！
+欢迎在评论区分享你的完整 settings.json 配置方案和设计思路. 这个练习将帮助你将本讲学到的两大安全支柱, 融会贯通地应用到真实的工程场景中. 如果你有所收获, 也欢迎你分享给其他朋友, 我们下节课再见! 
 
 
 

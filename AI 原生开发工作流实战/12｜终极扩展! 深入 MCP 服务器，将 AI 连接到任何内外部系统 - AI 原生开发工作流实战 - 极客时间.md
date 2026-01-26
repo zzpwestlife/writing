@@ -44,7 +44,7 @@ MCP 的诞生, 正是为了系统性地解决以上所有问题. MCP 并非一�
 
 
 
-主机 (Host) 的角色定位是 "总指挥" 与 "协调者". 这是用户直接与之交互的应用程序. 在我们的世界里: <span style="color: inherit; background-color: rgba(254,212,164,0.8)">Claude Code 本身就是主机</span>. 它有 3 个核心职责:&#x20;
+主机 (Host) 的角色定位是 "总指挥" 与 "协调者". 这是用户直接与之交互的应用程序. 在我们的世界里: Claude Code 本身就是主机. 它有 3 个核心职责:&#x20;
 
 1. 创建和管理与各个服务器连接的 客户端实例. 
 
@@ -86,7 +86,7 @@ MCP 的诞生, 正是为了系统性地解决以上所有问题. MCP 并非一�
 
 1. 服务发现: 在连接之初, MCP 服务器就会向 Claude Code "自我介绍", 告诉 AI 自己拥有哪些工具 (Tools) 以及每个工具需要什么参数. 
 
-2. <span style="color: inherit; background-color: rgba(254,212,164,0.8)">责任分离: AI 大模型只负责根据可用工具列表, 产生 "调用哪个工具" 的意图. Claude Code 客户端负责将这个意图, 翻译成标准的 MCP 协议请求. 而 MCP 服务器则只负责响应这个标准协议, 执行自身的业务逻辑. </span>
+2. 责任分离: AI 大模型只负责根据可用工具列表, 产生 "调用哪个工具" 的意图. Claude Code 客户端负责将这个意图, 翻译成标准的 MCP 协议请求. 而 MCP 服务器则只负责响应这个标准协议, 执行自身的业务逻辑. 
 
 3. 命名空间: Claude Code 会自动为来自不同 MCP 服务器的工具加上命名空间前缀, 格式为 mcp\_\_\<server\_name>\_\_\<tool\_name>, 避免冲突. 
 
@@ -108,7 +108,7 @@ MCP 的诞生, 正是为了系统性地解决以上所有问题. MCP 并非一�
 
 ![](images/12_image_2.png)
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">【最佳实践】 遵循一个简单的原则: 需要团队所有成员都使用的服务, 用 --scope project; 只属于你自己的、跨项目通用的工具, 用 --scope user; 临时的、不想提交到 Git 的个人测试, 使用默认的 local scope. </span>
+【最佳实践】 遵循一个简单的原则: 需要团队所有成员都使用的服务, 用 --scope project; 只属于你自己的、跨项目通用的工具, 用 --scope user; 临时的、不想提交到 Git 的个人测试, 使用默认的 local scope. 
 
 > 注: 你可以通过 claude mcp add/list/get/remove 对 MCP Server 进行管理. 
 
@@ -332,7 +332,7 @@ Checking MCP server health...
 hello: go run ./hello-mcp-server.go - ✓ Connected
 ```
 
-如果看到类似上面的 Connected 的输出, 则说明我们的 MCP Server 是正常工作的！
+如果看到类似上面的 Connected 的输出, 则说明我们的 MCP Server 是正常工作的! 
 
 
 
@@ -348,7 +348,7 @@ claude
 
 ![](images/12_image_3.png)
 
-现在, 让我们来调用这个全新的、由 Go 驱动的工具！请记住, 工具的完整名称是 `mcp__<server_name>__<tool_name>`  (这个我们在稍后的内容中还会有专门的说明) . 
+现在, 让我们来调用这个全新的、由 Go 驱动的工具! 请记住, 工具的完整名称是 `mcp__<server_name>__<tool_name>`  (这个我们在稍后的内容中还会有专门的说明) . 
 
 ```bash
 > 我想调用 mcp__hello__greet 工具, 名字是 Tony Bai. 
@@ -360,7 +360,7 @@ AI 会理解你的意图, 并向你提议一个工具调用. 你批准后, 会�
 
 
 
-恭喜你！你已经成功地创建并连接了你的第一个、用 Go 语言编写的 MCP 服务器. 这个简单的闭环, 清晰地展示了从 定义能力  ( handleInitialize ) , 到 注册能力  ( claude mcp add ) , 再到 调用能力  (自然语言 -> Tool Call) 的全过程. 更重要的是, 你现在已经亲手触摸到了 MCP 协议的底层脉搏. 
+恭喜你! 你已经成功地创建并连接了你的第一个、用 Go 语言编写的 MCP 服务器. 这个简单的闭环, 清晰地展示了从 定义能力  ( handleInitialize ) , 到 注册能力  ( claude mcp add ) , 再到 调用能力  (自然语言 -> Tool Call) 的全过程. 更重要的是, 你现在已经亲手触摸到了 MCP 协议的底层脉搏. 
 
 掌握了如何构建和连接本地 stdio 服务器后, 我们就拥有了为 AI 添加任何自定义脚本能力的基础. 现在, 让我们将视野从本地扩展到云端, 挑战一个更强大、也更具普遍性的场景. 
 
@@ -434,7 +434,7 @@ claude mcp add-json github '{"type":"http","url":"https://api.githubcopilot.com/
 
 * https://api.githubcopilot.com/mcp/: 这是 GitHub 官方提供的 MCP 服务器的 端点 URL. 
 
-* \--header "Authorization: Bearer \<YOUR\_GITHUB\_PAT>": 这是在远程、非交互式环境中进行认证的核心！ 通过 --header 参数, 我们为所有发送到这个 MCP 服务器的 HTTP 请求, 都预先设置了一个 Authorization 请求头. 其值就是标准的 Bearer 认证方案, 后面跟着你的 Personal Access Token. 这完美地解决了在远程虚拟机上无法打开浏览器进行 OAuth 2.0 认证的问题. 
+* \--header "Authorization: Bearer \<YOUR\_GITHUB\_PAT>": 这是在远程、非交互式环境中进行认证的核心!  通过 --header 参数, 我们为所有发送到这个 MCP 服务器的 HTTP 请求, 都预先设置了一个 Authorization 请求头. 其值就是标准的 Bearer 认证方案, 后面跟着你的 Personal Access Token. 这完美地解决了在远程虚拟机上无法打开浏览器进行 OAuth 2.0 认证的问题. 
 
 * \--scope project: 我们将这个配置保存在 项目作用域. 执行后, Claude Code 会在你的当前目录下创建一个 `.mcp.json` 文件, 并将这个服务器配置写进去. 将这个文件提交到 Git 仓库, 你的整个团队就能共享这个配置了 (当然, 每个成员都需要在自己的环境中设置各自的 Token) . 
 
@@ -480,7 +480,7 @@ github: https: //api.githubcopilot.com/mcp/ (HTTP) - ✓ Connected
 
 
 
-### 第四步: 实战！用自然语言操作 GitHub
+### 第四步: 实战! 用自然语言操作 GitHub
 
 万事俱备. 现在, 我们可以像与一位项目助理对话一样, 用自然语言来操作 GitHub 了. 
 
@@ -576,11 +576,11 @@ MCP 的强大之处, 不仅在于暴露 "工具 (Tools) ", 还在于可以暴露
 
 我们如何将一整套关于‘如何审查 Go 代码’的专家知识, 打包成一个 AI 在看到 `.go` 文件时就能 自主发现并加载 的‘技能包’, 而不是每次都依赖我们通过冗长的 Prompt 来指导?
 
-这就是我们下一讲要探讨的主题: <span style="color: inherit; background-color: rgba(254,212,164,0.8)">智能涌现的基石 —— 精通 Agent Skills, 为 AI 植入专家能力</span>. 我们将学习如何将我们的知识和最佳实践, 打包成 AI 可以自主发现和调用的 "知识胶囊", 让 AI 从一个 "熟练的工具使用者", 进化为一个能根据情境自主加载专家能力的 "博学思考者". 
+这就是我们下一讲要探讨的主题: 智能涌现的基石 —— 精通 Agent Skills, 为 AI 植入专家能力. 我们将学习如何将我们的知识和最佳实践, 打包成 AI 可以自主发现和调用的 "知识胶囊", 让 AI 从一个 "熟练的工具使用者", 进化为一个能根据情境自主加载专家能力的 "博学思考者". 
 
 
 
 ## 思考题
 
-今天我们学习了如何连接 GitHub MCP Server. 请你打开思路,  设想一个你认为最有价值的、可以被封装成 MCP 服务器的内部工具或服务. 这个服务是做什么的?它可能会向 AI 暴露哪些工具 (Tools) ?将它接入 Claude Code 后, 可以实现哪些目前难以完成的自动化工作流?例如, 一个连接公司内部 "代码片段知识库" 的 MCP Server?一个用于查询 "线上服务监控指标" 的 MCP Server?欢迎在评论区分享你的脑洞和创意！如果你觉得这节课的内容对你有帮助的话, 也欢迎你分享给需要的朋友, 我们下节课再见！
+今天我们学习了如何连接 GitHub MCP Server. 请你打开思路,  设想一个你认为最有价值的、可以被封装成 MCP 服务器的内部工具或服务. 这个服务是做什么的?它可能会向 AI 暴露哪些工具 (Tools) ?将它接入 Claude Code 后, 可以实现哪些目前难以完成的自动化工作流?例如, 一个连接公司内部 "代码片段知识库" 的 MCP Server?一个用于查询 "线上服务监控指标" 的 MCP Server?欢迎在评论区分享你的脑洞和创意! 如果你觉得这节课的内容对你有帮助的话, 也欢迎你分享给需要的朋友, 我们下节课再见! 
 

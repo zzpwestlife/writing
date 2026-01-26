@@ -209,7 +209,7 @@ func GetGreeting(name string, isFormal bool, time TimeOfDay) string {
 
 * 心智模型: "AI, 我们刚才那段探索完全是条死胡同. 让我们 假装它从未发生过, 从这个更早的时间点重新开始. "
 
-* 适用场景: 当你对 AI 的一系列修改和你们的整个讨论方向都不满意时, <span style="color: inherit; background-color: rgba(254,212,164,0.8)">这是最彻底、最干净的 "重置" 按钮. </span>
+* 适用场景: 当你对 AI 的一系列修改和你们的整个讨论方向都不满意时, 这是最彻底、最干净的 "重置" 按钮. 
 
 在我们的场景中, 我们对第二次重构的整个方向 (引入枚举) 都不满意, 所以我们选择 Rewind code and conversation, 然后按下回车. 
 
@@ -241,7 +241,7 @@ Checkpointing 虽然强大, 但它不是万能的. 清晰地理解它的边界, 
 
 
 
-* 它不跟踪外部编辑: Checkpointing 的 "眼睛" 只盯着由 Claude Code 的 内置编辑工具  (如 Write, Edit) 所修改的文件. <span style="color: inherit; background-color: rgba(254,212,164,0.8)">如果你在与 AI 对话的同时, 自己在 VS Code 或 VIM 里手动修改了 greeting.go, 这个手动的修改 不会被记录 在 Checkpointing 的历史中</span>. 
+* 它不跟踪外部编辑: Checkpointing 的 "眼睛" 只盯着由 Claude Code 的 内置编辑工具  (如 Write, Edit) 所修改的文件. 如果你在与 AI 对话的同时, 自己在 VS Code 或 VIM 里手动修改了 greeting.go, 这个手动的修改 不会被记录 在 Checkpointing 的历史中. 
 
 这通常不是问题, 但需要记住: /rewind 恢复的是 上一个检查点时刻、由 Claude Code 所知晓 的文件状态. 
 
@@ -273,5 +273,5 @@ Checkpointing 虽然强大, 但它不是万能的. 清晰地理解它的边界, 
 
 除了今天我们演示的 "代码重构" 场景, 请你再设想 至少两个 你认为 Checkpointing 机制能发挥巨大价值的日常开发场景. 例如, 探索一个新库的不同 API 用法?或者让 AI 生成多个不同风格的 UI 组件代码以供挑选?
 
-请描述你的场景, 并说明在这种场景下, 你可能会更倾向于使用 /rewind 的哪种模式 (只回退代码、只回退对话, 或全部回退) , 以及为什么. 欢迎在评论区分享你的创意工作流！如果你觉得今天的内容对你有帮助, 也欢迎你分享给需要的朋友, 我们下节课再见！
+请描述你的场景, 并说明在这种场景下, 你可能会更倾向于使用 /rewind 的哪种模式 (只回退代码、只回退对话, 或全部回退) , 以及为什么. 欢迎在评论区分享你的创意工作流! 如果你觉得今天的内容对你有帮助, 也欢迎你分享给需要的朋友, 我们下节课再见! 
 

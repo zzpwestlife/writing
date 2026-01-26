@@ -88,7 +88,7 @@ Your changes have been committed successfully and your working tree is now clean
 
 当你的输入内容非常庞大时, 比如一个几千行的日志文件, 或者整个项目的 tree 结构, 通过参数传递就不现实了. 此时, Linux 世界最经典的 "管道 (Pipe) " 操作就派上了用场. 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">Claude Code 的 Headless 模式, 可以无缝地接收来自 stdin 的输入. </span>
+Claude Code 的 Headless 模式, 可以无缝地接收来自 stdin 的输入. 
 
 
 
@@ -121,7 +121,7 @@ cat nginx-error.log | claude -p "请分析这份Nginx错误日志, 总结出最�
 
 当你需要对 AI Agent 的输出进行 编程化处理 时, 比如你想判断任务是否成功、获取执行成本、或者解析 AI 调用的某个工具的结果, 纯文本的输出就显得不够用了. 你需要的是机器友好的 结构化数据. 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">Claude Code 的 --output-format 参数提供了三种选择: text  (默认) 、 json 和 stream-json. </span>
+Claude Code 的 --output-format 参数提供了三种选择: text  (默认) 、 json 和 stream-json. 
 
 
 
@@ -339,7 +339,7 @@ jobs:
 
 例如, 我们能否解析 AI 审查报告的 结构  (比如 AI 是否标记了 "高优先级" 问题) , 并根据此来决定这个 CI 流水线是 通过 (Pass)  还是 失败 (Fail)  ?如果可以, 你会在 github-script 步骤中如何实现这个逻辑?
 
-欢迎在评论区分享你的设计方案！这会是一个非常棒的、关于 AI 与 DevOps 深度融合的思维练习. 
+欢迎在评论区分享你的设计方案! 这会是一个非常棒的、关于 AI 与 DevOps 深度融合的思维练习. 
 
 
 

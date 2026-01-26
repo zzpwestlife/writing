@@ -22,7 +22,7 @@
 
 在深入 constitution.md 的具体内容之前, 我们必须首先清晰地辨析它与我们在上一讲学习的 CLAUDE.md / AGENTS.md 之间的根本区别. 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">如果说 CLAUDE.md 是交给 </span><span style="color: inherit; background-color: rgba(254,212,164,0.8)">AI Agent</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)"> 的 "操作指南", 那么 constitution.md 就是我们与 AI Agent 共同签署的 "原则契约". </span>
+如果说 CLAUDE.md 是交给 AI Agent 的 "操作指南", 那么 constitution.md 就是我们与 AI Agent 共同签署的 "原则契约". 
 
 ![](images/07_image.png)
 
@@ -52,7 +52,7 @@
 
 ## 解读 "开发九章": 深入 spec-kit 的架构哲学
 
-constitution.md 这个概念, 最早由 GitHub 的 spec-kit 项目提出并系统化. 它并非一份随意的文档, 而<span style="color: inherit; background-color: rgba(254,212,164,0.8)">是一套经过深思熟虑的、旨在约束 AI Agent 行为、确保工程质量的 架构哲学</span>.  spec-kit 的 规范驱动开发说明 中, 这份 "宪法" 被分为了九条核心 "法案" 来举例说明. 虽然我们不必全盘照搬, 但深入理解这 "开发九章" 示例背后的思想, 对于我们编写自己的 "宪法" 至关重要. 
+constitution.md 这个概念, 最早由 GitHub 的 spec-kit 项目提出并系统化. 它并非一份随意的文档, 而是一套经过深思熟虑的、旨在约束 AI Agent 行为、确保工程质量的 架构哲学.  spec-kit 的 规范驱动开发说明 中, 这份 "宪法" 被分为了九条核心 "法案" 来举例说明. 虽然我们不必全盘照搬, 但深入理解这 "开发九章" 示例背后的思想, 对于我们编写自己的 "宪法" 至关重要. 
 
 ![](images/07_image_2.png)
 
@@ -143,7 +143,7 @@ constitution.md for issue2md
 
 
 
-<span style="color: inherit; background-color: rgba(254,212,164,0.8)">机制保障 (通过 </span>`plan.md`<span style="color: inherit; background-color: rgba(254,212,164,0.8)"> 模板) :  最可靠的方式, 是将 "合宪性审查" 变成一个 强制性的流程节点</span>. 在 spec-kit 的实践中,  plan.md 的模板里包含了一个名为 "Constitution Check" 的章节, 里面有多个 "Gate (门禁) ". 
+机制保障 (通过 `plan.md` 模板) :  最可靠的方式, 是将 "合宪性审查" 变成一个 强制性的流程节点. 在 spec-kit 的实践中,  plan.md 的模板里包含了一个名为 "Constitution Check" 的章节, 里面有多个 "Gate (门禁) ". 
 
 例如, 一个 plan.md 的模板可能是这样的: 
 
@@ -191,13 +191,13 @@ constitution.md for issue2md
 
 请你审视一下你当前所在团队或你参与的开源项目,  是否存在一些不成文的、但大家都在默默遵守的 "开发哲学" 或 "架构原则"? 例如, "我们绝不使用 ORM" "所有的数据库变更都必须有回滚脚本" "前端组件必须是无状态的" 等等. 
 
-请你尝试将其中最重要的 一到两条 原则, 用我们今天学习的 constitution.md 的风格, 写成 "法案" 的形式. 欢迎在评论区分享你的 "立法" 尝试. 这个练习将帮助你思考如何将团队的隐性知识, 转化为可被 AI 理解和执行的显性规则. 如果你觉得有所收获也欢迎你分享给需要的朋友, 我们下节课再见！
+请你尝试将其中最重要的 一到两条 原则, 用我们今天学习的 constitution.md 的风格, 写成 "法案" 的形式. 欢迎在评论区分享你的 "立法" 尝试. 这个练习将帮助你思考如何将团队的隐性知识, 转化为可被 AI 理解和执行的显性规则. 如果你觉得有所收获也欢迎你分享给需要的朋友, 我们下节课再见! 
 
 
 
 
 
 * <span style="color: rgb(143,149,158); background-color: inherit">团队不断丰富和优化项目规范是正确的. 但就我的实践来看, 有几点对抗 "规范膨胀" 的小 tip 吧: 
-  </span><span style="color: rgb(143,149,158); background-color: inherit">不要把所有规范塞进一个文件, 至少保证单一的文件没那么膨胀. 可以按领域划分到不同规范文件中, 比如 go-style.md, db-rules.md 等, 然后在 CLAUDE.md 或 AGENT.md 中 import. 
-  </span><span style="color: rgb(143,149,158); background-color: inherit">尽量工具优先. 凡是能用 像 golangci-lint、ESLint 等自动化工具解决的规范, 可考虑不必写在 Prompt 或 Markdown 里. 让工具去管, 而不浪费 AI 的 Token 去读规范. 
-  </span><span style="color: rgb(143,149,158); background-color: inherit">定期 "优化":  团队应定期审查, 把过时的、过于琐碎的规范剔除. </span>
+  <span style="color: rgb(143,149,158); background-color: inherit">不要把所有规范塞进一个文件, 至少保证单一的文件没那么膨胀. 可以按领域划分到不同规范文件中, 比如 go-style.md, db-rules.md 等, 然后在 CLAUDE.md 或 AGENT.md 中 import. 
+  <span style="color: rgb(143,149,158); background-color: inherit">尽量工具优先. 凡是能用 像 golangci-lint、ESLint 等自动化工具解决的规范, 可考虑不必写在 Prompt 或 Markdown 里. 让工具去管, 而不浪费 AI 的 Token 去读规范. 
+  <span style="color: rgb(143,149,158); background-color: inherit">定期 "优化":  团队应定期审查, 把过时的、过于琐碎的规范剔除. 
