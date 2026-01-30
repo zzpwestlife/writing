@@ -3,6 +3,7 @@
 > 🔗 **系列回顾**：
 > *   [Part 2：当“护盘侠”遇到“烂泥”与“真金”](https://mp.weixin.qq.com/s/YourPart2LinkHere)
 > *   [Part 1：揭秘港股 IPO 的“护盘神器”](https://mp.weixin.qq.com/s/YourPart1LinkHere)
+> *   [前传：深度 | 揭秘港股 IPO “绿鞋机制”：稳价神器的幕后逻辑与实战博弈](https://mp.weixin.qq.com/s/INjoLCZhVkC4GviJMT3E0g)
 
 欢迎来到 **Part 3**！
 
