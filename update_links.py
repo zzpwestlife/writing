@@ -11,7 +11,8 @@ NEW_BRANCH = "main"              # 分支名
 TARGET_FILES = [
     "港股_IPO_绿鞋机制深度解析_wechat.md",
     "港股_IPO_绿鞋机制深度解析_part2_wechat.md",
-    "港股_IPO_绿鞋机制深度解析_part3_wechat.md"
+    "港股_IPO_绿鞋机制深度解析_part3_wechat.md",
+    "港股_IPO_绿鞋机制深度解析_part4_wechat.md"
 ]
 
 def update_links():
