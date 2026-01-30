@@ -2,11 +2,13 @@
 
 > **前情回顾**
 >
-> 🎯 **[Part 1：绿鞋机制基础与经典案例](https://mp.weixin.qq.com/s/INjoLCZhVkC4GviJMT3E0g)**（了解绿鞋基本原理）
+> 🎯 **[Part 3：绿鞋失效？还是另有隐情？](https://mp.weixin.qq.com/s/YOUR_PART3_LINK)**（深入探讨复杂市场环境下的绿鞋表现）
 >
 > 🎯 **[Part 2：那些年我们追过的“绿鞋”](https://mp.weixin.qq.com/s/YOUR_PART2_LINK)**（更多实战案例分析）
 >
-> 🎯 **[Part 3：绿鞋失效？还是另有隐情？](https://mp.weixin.qq.com/s/YOUR_PART3_LINK)**（深入探讨复杂市场环境下的绿鞋表现）
+> 🎯 **[Part 1：绿鞋机制实例解析(一)](https://mp.weixin.qq.com/s/YOUR_PART1_LINK)**（绿鞋机制基础与经典案例）
+>
+> 🎯 **[前传：深入理解港股 IPO 中的绿鞋机制](https://mp.weixin.qq.com/s/INjoLCZhVkC4GviJMT3E0g)**（稳价神器的幕后逻辑）
 
 ---
 
