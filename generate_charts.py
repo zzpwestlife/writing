@@ -1,138 +1,261 @@
+import svgwrite
+import math
 import os
+import random
 
-# Ensure directory exists
-output_dir = "image/summary"
-os.makedirs(output_dir, exist_ok=True)
+# Data for 29 Stocks
+# Usage: 0-100%
+# Perf: -60 (Deep Dive) to +100 (Moon)
+# Updated with user provided specific data
+raw_data = [
+    # Part 1
+    ("古茗", 100, 80), # User confirmed 4 days 100%
+    ("赤峰黄金", 100, 40), # User confirmed 4 days 100%
+    ("绿茶集团", 100, -50),
+    ("手回集团", 100, -50),
+    ("海天味业", 20, -10),
+    ("三花智控", 30, 10),
+    ("曹操出行", 40, 60),
+    ("圣贝拉", 35, -30), # User: 4.7+9+9+10+2 = 34.7%
+    # Part 2
+    ("颖通控股", 100, -50),
+    ("奥克斯电器", 32, -40),
+    ("云知声", 14, 10),
+    ("天岳先进", 3, 30),
+    ("大行科工", 5, -30),
+    ("安井食品", 57, 60),
+    ("禾赛", 6, -50),
+    ("奇瑞汽车", 8, -10),
+    # Part 3
+    ("赛力斯", 40, -20),
+    ("文远知行", 40, -20),
+    ("小马智行", 75, -20), # User: 43+20+2% daily. Est ~75% total
+    ("希迪智驾", 70, -60), # User: 50+6+7+7 = 70%
+    ("遇见小面", 100, -50),
+    ("广和通", 45, -40),
+    ("京东工业", 33, 0),
+    ("三一重工", 12, -5),
+    # Part 4
+    ("迅策", 90, 5),
+    ("卧安机器人", 24, 90),
+    ("智谱", 7, 80),
+    ("豪威集团", 11, -10), # User: 5.5+5.5 = 11%
+    ("龙旗科技", 77, 0),
+]
 
 def create_bar_chart_svg(filename, title, data, x_label, y_label):
-    width = 800
-    height = 500
+    dwg = svgwrite.Drawing(filename, size=(900, 800))
+    
+    # Sort data by usage descending
+    sorted_data = sorted(data, key=lambda x: x[1], reverse=True)
+    top_10 = sorted_data[:10]
+    
+    width = 900
+    height = 800
     margin_left = 150
-    margin_bottom = 50
-    margin_top = 80
     margin_right = 50
+    margin_top = 80
+    margin_bottom = 50
     
     chart_width = width - margin_left - margin_right
     chart_height = height - margin_top - margin_bottom
     
-    max_val = max([v for k, v in data])
-    bar_height = chart_height / len(data)
-    bar_padding = 10
-    actual_bar_height = bar_height - bar_padding
-    
-    svg = f'<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">'
+    bar_height = 40
+    gap = 20
     
     # Background
-    svg += f'<rect width="100%" height="100%" fill="white"/>'
+    dwg.add(dwg.rect(insert=(0, 0), size=('100%', '100%'), fill='white'))
     
     # Title
-    svg += f'<text x="{width/2}" y="40" text-anchor="middle" font-size="24" font-weight="bold" font-family="sans-serif">{title}</text>'
+    dwg.add(dwg.text(title, insert=(width/2, 40), text_anchor="middle", font_size=24, font_weight="bold", font_family="sans-serif"))
     
     # Axes
-    svg += f'<line x1="{margin_left}" y1="{margin_top}" x2="{margin_left}" y2="{height-margin_bottom}" stroke="black" stroke-width="2"/>'
-    svg += f'<line x1="{margin_left}" y1="{height-margin_bottom}" x2="{width-margin_right}" y2="{height-margin_bottom}" stroke="black" stroke-width="2"/>'
+    # dwg.add(dwg.line(start=(margin_left, margin_top), end=(margin_left, height - margin_bottom), stroke="black", stroke_width=2))
+    # dwg.add(dwg.line(start=(margin_left, height - margin_bottom), end=(width - margin_right, height - margin_bottom), stroke="black", stroke_width=2))
     
-    # Bars
-    for i, (name, value) in enumerate(data):
-        y = margin_top + i * bar_height + bar_padding/2
-        bar_w = (value / max_val) * chart_width
+    max_val = 100
+    
+    for i, (name, val) in enumerate(top_10):
+        y = margin_top + i * (bar_height + gap)
+        bar_w = (val / max_val) * chart_width
         
-        # Color based on value
-        color = "#e74c3c" if value >= 80 else "#f39c12" if value >= 40 else "#2ecc71"
+        # Label
+        dwg.add(dwg.text(name, insert=(margin_left - 10, y + bar_height/2 + 5), text_anchor="end", font_size=16, font_family="sans-serif"))
         
-        svg += f'<rect x="{margin_left}" y="{y}" width="{bar_w}" height="{actual_bar_height}" fill="{color}"/>'
-        svg += f'<text x="{margin_left - 10}" y="{y + actual_bar_height/2 + 5}" text-anchor="end" font-size="14" font-family="sans-serif">{name}</text>'
-        svg += f'<text x="{margin_left + bar_w + 10}" y="{y + actual_bar_height/2 + 5}" text-anchor="start" font-size="14" font-family="sans-serif">{value}%</text>'
+        # Bar
+        color = "#e74c3c" if val >= 80 else "#f39c12" if val >= 50 else "#3498db"
+        dwg.add(dwg.rect(insert=(margin_left, y), size=(bar_w, bar_height), fill=color, rx=5, ry=5))
+        
+        # Value
+        dwg.add(dwg.text(f"{val}%", insert=(margin_left + bar_w + 10, y + bar_height/2 + 5), font_size=14, font_family="sans-serif", font_weight="bold"))
 
-    # X Axis Label
-    svg += f'<text x="{width/2 + margin_left/2}" y="{height-10}" text-anchor="middle" font-size="16" font-family="sans-serif">{x_label}</text>'
-    
-    svg += '</svg>'
-    
-    with open(os.path.join(output_dir, filename), 'w', encoding='utf-8') as f:
-        f.write(svg)
+    dwg.save()
     print(f"Generated {filename}")
 
 def create_quadrant_chart_svg(filename, title, points):
-    # Points: list of (name, x_val, y_val, color)
-    # X: Greenshoe Usage (Low -> High)
-    # Y: Stock Performance (Poor -> Good)
+    dwg = svgwrite.Drawing(filename, size=(900, 700))
+    width = 900
+    height = 700
+    margin = 80
     
-    width = 800
-    height = 600
-    margin = 60
+    # Background
+    dwg.add(dwg.rect(insert=(0, 0), size=('100%', '100%'), fill='white'))
     
-    svg = f'<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">'
-    svg += f'<rect width="100%" height="100%" fill="white"/>'
-    svg += f'<text x="{width/2}" y="40" text-anchor="middle" font-size="24" font-weight="bold" font-family="sans-serif">{title}</text>'
+    # Title
+    dwg.add(dwg.text(title, insert=(width/2, 40), text_anchor="middle", font_size=24, font_weight="bold", font_family="sans-serif"))
     
-    # Grid lines
-    mid_x = width / 2
-    mid_y = height / 2 + 20
+    # Axis Ranges
+    # X: Usage 0 to 100
+    # Y: Perf -60 to 100
     
-    svg += f'<line x1="{margin}" y1="{mid_y}" x2="{width-margin}" y2="{mid_y}" stroke="gray" stroke-width="2" stroke-dasharray="5,5"/>'
-    svg += f'<line x1="{mid_x}" y1="{margin+40}" x2="{mid_x}" y2="{height-margin}" stroke="gray" stroke-width="2" stroke-dasharray="5,5"/>'
+    def get_x(usage):
+        return margin + (usage / 100) * (width - 2 * margin)
     
-    # Quadrant Labels
-    svg += f'<text x="{width-margin}" y="{mid_y-10}" text-anchor="end" font-weight="bold" fill="gray">表现优异</text>'
-    svg += f'<text x="{width-margin}" y="{mid_y+20}" text-anchor="end" font-weight="bold" fill="gray">表现不佳</text>'
-    svg += f'<text x="{margin}" y="{margin+50}" text-anchor="start" font-weight="bold" fill="gray">绿鞋用量少</text>'
-    svg += f'<text x="{width-margin}" y="{margin+50}" text-anchor="end" font-weight="bold" fill="gray">绿鞋用量多</text>'
+    def get_y(perf):
+        # Invert Y: Top is high perf (+100), Bottom is low perf (-60)
+        # Range = 160
+        # Normalizing: (perf - (-60)) / 160 = (perf + 60) / 160
+        # SVG Y = height - margin - norm * chart_height
+        chart_h = height - 2 * margin
+        norm = (perf + 60) / 160
+        return (height - margin) - norm * chart_h
 
-    # Plot points
-    # Map input 0-100 to canvas coordinates
-    # X: 0 -> margin, 100 -> width-margin
-    # Y: -50 -> height-margin, 50 -> margin+40 (inverted Y)
+    origin_x = get_x(50) # Midpoint of usage? Or 50%? Let's use 50% usage as separator
+    origin_y = get_y(0)  # 0% performance
     
-    for name, usage, perf, color in points:
-        # Normalize usage (0-100)
-        cx = margin + (usage / 100) * (width - 2*margin)
-        
-        # Normalize performance (-50 to 50 approx range for display)
-        # perf is roughly -30 to +30. Let's map -50 to height-margin, +50 to margin+40
-        cy = (height - margin) - ((perf + 50) / 100) * (height - 2*margin - 40)
-        
-        svg += f'<circle cx="{cx}" cy="{cy}" r="6" fill="{color}" stroke="black" stroke-width="1"/>'
-        svg += f'<text x="{cx+8}" y="{cy+4}" font-size="12" font-family="sans-serif">{name}</text>'
+    # Quadrant Background Colors (Lighter opacity for better visibility)
+    # Top Left (Low Usage, High Perf): Greenish
+    dwg.add(dwg.rect(insert=(margin, margin), size=(origin_x - margin, origin_y - margin), fill="#e8f8f5", opacity=0.3))
+    # Top Right (High Usage, High Perf): Yellowish
+    dwg.add(dwg.rect(insert=(origin_x, margin), size=(width - margin - origin_x, origin_y - margin), fill="#fef9e7", opacity=0.3))
+    # Bottom Left (Low Usage, Low Perf): Greyish
+    dwg.add(dwg.rect(insert=(margin, origin_y), size=(origin_x - margin, height - margin - origin_y), fill="#f4f6f7", opacity=0.3))
+    # Bottom Right (High Usage, Low Perf): Reddish
+    dwg.add(dwg.rect(insert=(origin_x, origin_y), size=(width - margin - origin_x, height - margin - origin_y), fill="#fdedec", opacity=0.3))
+    
+    # Axes Lines
+    dwg.add(dwg.line(start=(margin, origin_y), end=(width - margin, origin_y), stroke="#7f8c8d", stroke_width=2, stroke_dasharray="5,5"))
+    dwg.add(dwg.line(start=(origin_x, margin), end=(origin_x, height - margin), stroke="#7f8c8d", stroke_width=2, stroke_dasharray="5,5"))
+    
+    # Quadrant Labels (Adjusted positions to corners to avoid data overlap)
+    dwg.add(dwg.text("躺赢/真金", insert=(margin + 20, margin + 30), font_size=16, font_weight="bold", fill="#27ae60", opacity=0.8))
+    dwg.add(dwg.text("逆袭/大力出奇迹", insert=(width - margin - 150, margin + 30), font_size=16, font_weight="bold", fill="#f39c12", opacity=0.8))
+    dwg.add(dwg.text("弃疗/无力回天", insert=(margin + 20, height - margin - 10), font_size=16, font_weight="bold", fill="#95a5a6", opacity=0.8))
+    dwg.add(dwg.text("泥潭/肉包子打狗", insert=(width - margin - 150, height - margin - 10), font_size=16, font_weight="bold", fill="#c0392b", opacity=0.8))
+    
+    # Axis Labels
+    dwg.add(dwg.text("绿鞋使用率 (0% -> 100%)", insert=(width/2, height - 20), text_anchor="middle", font_size=14))
+    dwg.add(dwg.text("上市至今涨跌幅", insert=(20, height/2), text_anchor="middle", font_size=14, transform=f"rotate(-90 20 {height/2})"))
+    
+    # Prepare Labels with Collision Avoidance
+    labels = []
+    for name, usage, perf in points:
+        cx = get_x(usage)
+        cy = get_y(perf)
+        # Determine color based on perf
+        color = "#2ecc71" if perf > 0 else "#e74c3c" if perf < 0 else "#95a5a6"
+        labels.append({
+            'name': name,
+            'cx': cx,
+            'cy': cy,
+            'usage': usage,
+            'perf': perf,
+            'color': color,
+            'lx': cx + 8,     # Initial Label X
+            'ly': cy + 4,     # Initial Label Y (baseline)
+            'w': len(name) * 12, # Approx width
+            'h': 14           # Approx height
+        })
 
-    svg += '</svg>'
+    # Sort labels by Y primarily, then X. This helps in stacking from top to bottom.
+    labels.sort(key=lambda k: (k['cy'], k['cx']))
+
+    # Simple Iterative Collision Resolution
+    # We only adjust Y to stack labels. If Y shifts too much, we might shift X? 
+    # For this chart, simple vertical stacking is best for points at same location.
     
-    with open(os.path.join(output_dir, filename), 'w', encoding='utf-8') as f:
-        f.write(svg)
+    def is_overlap(l1, l2):
+        # l1, l2 are label dicts
+        # Rect: x, y-10, w, h
+        r1 = (l1['lx'], l1['ly'] - 10, l1['w'], l1['h'])
+        r2 = (l2['lx'], l2['ly'] - 10, l2['w'], l2['h'])
+        
+        return not (r1[0] + r1[2] < r2[0] or \
+                    r1[0] > r2[0] + r2[2] or \
+                    r1[1] + r1[3] < r2[1] or \
+                    r1[1] > r2[1] + r2[3])
+
+    for i in range(len(labels)):
+        current = labels[i]
+        
+        # Max iterations to find a spot
+        for attempt in range(50):
+            overlap = False
+            for j in range(len(labels)):
+                if i == j: continue
+                other = labels[j]
+                
+                # Check intersection
+                if is_overlap(current, other):
+                    overlap = True
+                    # Conflict! Move current label down
+                    # But if we move it down, we might overlap with next one.
+                    # It's better to verify against ALL labels, but we can only ensure non-overlap with processed ones?
+                    # Actually, we can just check against everyone. 
+                    # If overlap, move down by fixed step.
+                    current['ly'] += 15
+                    
+                    # If moved too far down relative to point, maybe move to left side?
+                    if current['ly'] - current['cy'] > 100:
+                         # Reset Y and move Left
+                         current['ly'] = current['cy'] + 4
+                         current['lx'] = current['cx'] - current['w'] - 8
+                         # Add flag to prevent infinite ping-pong?
+                         # For now, just keep moving down is safer for "list" effect.
+                    break
+            
+            if not overlap:
+                break
+
+    # Draw Points
+    for l in labels:
+        dwg.add(dwg.circle(center=(l['cx'], l['cy']), r=5, fill=l['color'], stroke="white", stroke_width=1))
+
+    # Draw Connecting Lines (if label moved far)
+    for l in labels:
+        dist = math.sqrt((l['lx'] - l['cx'])**2 + (l['ly'] - l['cy'])**2)
+        if dist > 20:
+            # Draw line from point to label
+            # Adjust start/end to look good
+            label_center_y = l['ly'] - 5
+            label_left_x = l['lx']
+            label_right_x = l['lx'] + l['w']
+            
+            # If label is to the right
+            if l['lx'] > l['cx']:
+                dwg.add(dwg.line(start=(l['cx'], l['cy']), end=(label_left_x - 2, label_center_y), stroke="#bdc3c7", stroke_width=1))
+            else:
+                 dwg.add(dwg.line(start=(l['cx'], l['cy']), end=(label_right_x + 2, label_center_y), stroke="#bdc3c7", stroke_width=1))
+
+    # Draw Labels with Halo for readability
+    for l in labels:
+        # Halo (thick white stroke)
+        dwg.add(dwg.text(l['name'], insert=(l['lx'], l['ly']), font_size=10, font_family="sans-serif", 
+                         fill="white", stroke="white", stroke_width=3, stroke_opacity=0.8))
+        # Actual Text
+        dwg.add(dwg.text(l['name'], insert=(l['lx'], l['ly']), font_size=10, font_family="sans-serif", 
+                         fill="#2c3e50"))
+
+    dwg.save()
     print(f"Generated {filename}")
 
-# Data for Chart 1: Top Usage (First Day/Early)
-usage_data = [
-    ("绿茶集团", 100),
-    ("手回集团", 100),
-    ("遇见小面", 100),
-    ("颖通控股", 100),
-    ("迅策", 90),
-    ("古茗", 81),
-    ("安井食品", 57),
-    ("广和通", 45),
-    ("龙旗科技", 42),
-    ("赛力斯", 40),
-]
-
-# Data for Chart 2: Outcome Scatter (Approximate data for visualization)
-# Usage (0-100), Performance (-50 to 50 score)
-# Color: Red (Bad), Green (Good), Yellow (Neutral)
-scatter_data = [
-    ("曹操出行", 30, 40, "#2ecc71"), # Good perf, mod usage
-    ("卧安机器人", 24, 30, "#2ecc71"),
-    ("天岳先进", 3, 20, "#2ecc71"),
-    ("三一重工", 12, 5, "#f1c40f"), # Stable
-    ("京东工业", 33, 0, "#f1c40f"), # Stable
-    ("龙旗科技", 42, 0, "#f1c40f"), # Stable at IPO price
-    ("古茗", 81, -10, "#e74c3c"), # Initial drop
-    ("手回集团", 100, -30, "#e74c3c"), # Drop
-    ("绿茶集团", 100, -25, "#e74c3c"), # Drop
-    ("禾赛", 6, -40, "#95a5a6"), # Gave up
-    ("希迪智驾", 0, -45, "#95a5a6"), # Gave up
-    ("智谱", 7, 10, "#f1c40f"), # Recovered
-]
-
 if __name__ == "__main__":
-    create_bar_chart_svg("top_usage.svg", "IPO首日/初期绿鞋资金消耗比例 TOP10", usage_data, "消耗比例 (%)", "股票名称")
-    create_quadrant_chart_svg("matrix_analysis.svg", "绿鞋用量与股价表现矩阵分析", scatter_data)
+    # Ensure directory exists
+    os.makedirs("绿鞋/image/summary", exist_ok=True)
+    
+    # 1. Bar Chart Data (Name, Usage)
+    usage_data = [(d[0], d[1]) for d in raw_data]
+    create_bar_chart_svg("绿鞋/image/summary/top_usage.svg", "29只港股IPO绿鞋资金累计消耗比例 TOP10", usage_data, "累计消耗比例 (%)", "股票名称")
+    
+    # 2. Quadrant Chart Data (Name, Usage, Perf)
+    create_quadrant_chart_svg("绿鞋/image/summary/matrix_analysis.svg", "绿鞋用量与股价表现矩阵分析 (29只样本)", raw_data)
