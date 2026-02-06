@@ -62,9 +62,9 @@
 
 <span style="color: inherit; background-color: rgba(254,212,164,0.8)">绿鞋</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)">机制, 是港股首次公开募股 (</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)">IPO</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)">) 中一项至关重要的</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)">制度</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)">安排, 其正式名称为"超额配售选择权". 该机制旨在通过</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)">承销商</span><span style="color: inherit; background-color: rgba(254,212,164,0.8)"> (主承销商作为稳价人) 在上市后特定时期内的市场操作, 平滑新股上市初期的股价波动, 实现一二级市场的平稳过渡. </span>
 
-![看有没有这几个字就行了](images/image.png)
+![看有没有这几个字就行了](../assets/deep_dive/image.png)
 
-![这个就没有绿鞋, 也没有发售量调整权, 就是 100% 发售](images/image-1.png)
+![这个就没有绿鞋, 也没有发售量调整权, 就是 100% 发售](../assets/deep_dive/image-1.png)
 
 ### 1.1 🔍 基本概念: 定义、起源与本质
 
@@ -80,9 +80,9 @@
 
 [绿鞋使用案例](https://www1.hkexnews.hk/listedco/listconews/sehk/2025/1116/2025111600078_c.pdf)
 
-![](images/image-2.png)
+![](../assets/deep_dive/image-2.png)
 
-![](images/image-3.png)
+![](../assets/deep_dive/image-3.png)
 
 绿鞋机制的运作遵循一套明确且受到监管的规则, 其核心环节可概括如下: 
 

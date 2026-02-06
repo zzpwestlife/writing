@@ -1,7 +1,7 @@
 import os
 
 # Ensure directory exists
-output_dir = "image/summary"
+output_dir = "../assets/summary"
 os.makedirs(output_dir, exist_ok=True)
 
 def create_bar_chart_svg(filename, title, data, x_label, y_label):
