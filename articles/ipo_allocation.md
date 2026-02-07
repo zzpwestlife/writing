@@ -41,24 +41,9 @@
     *   **新规划重点 (2025.08)**：港交所新规已将回拨机制简化为**A/B双轨制**。特别是**机制B**，将散户配售比例严格锁定在 **10%**，不再因超购倍数无脑回拨。这对机构护盘是利好，避免了散户持仓过高导致的踩踏。
 
 > 💡 **可视化图解**
-> *(注：微信公众号暂不支持动态图表，以下为结构示意)*
+> *(注：以下为生成的静态结构图，可直接在微信中展示)*
 
-```mermaid
-graph TD
-    A[总股本 Total Share Capital] --> B[非上市流通股 Unlisted Shares]
-    A --> C[全球发售 Global Offering]
-    B --> B1[创始人/管理层]
-    B --> B2[Pre-IPO 投资者]
-    C --> D[基石投资者 Cornerstone]
-    C --> E[流通部分 Tradable Portion]
-    E --> F[国际配售 Institutional]
-    E --> G[公开发售 Public Offer]
-    E --> H[绿鞋 Green Shoe]
-    
-    style B fill:#f9f,stroke:#333,stroke-width:2px
-    style D fill:#bbf,stroke:#333,stroke-width:2px
-    style H fill:#bfb,stroke:#333,stroke-width:2px
-```
+![IPO股权结构全景图](https://mermaid.ink/img/Z3JhcGggVEQKICAgIEFb5oC76IKh5pysIFRvdGFsIFNoYXJlIENhcGl0YWxdIC0tPiBCW-mdnuS4iuW4gua1gemAmuiCoSBVbmxpc3RlZCBTaGFyZXNdCiAgICBBIC0tPiBDW-WFqOeQg-WPkeWUriBHbG9iYWwgT2ZmZXJpbmddCiAgICBCIC0tPiBCMVvliJvlp4vkurov566h55CG5bGCXQogICAgQiAtLT4gQjJbUHJlLUlQTyDmipXotYTogIVdCiAgICBDIC0tPiBEW-Wfuuefs-aKlei1hOiAhSBDb3JuZXJzdG9uZV0KICAgIEMgLS0-IEVb5rWB6YCa6YOo5YiGIFRyYWRhYmxlIFBvcnRpb25dCiAgICBFIC0tPiBGW-WbvemZhemFjeWUriBJbnN0aXR1dGlvbmFsXQogICAgRSAtLT4gR1vlhazlvIDlj5HllK4gUHVibGljIE9mZmVyXQogICAgRSAtLT4gSFvnu7_pnosgR3JlZW4gU2hvZV0KICAgIAogICAgc3R5bGUgQiBmaWxsOiNmOWYsc3Ryb2tlOiMzMzMsc3Ryb2tlLXdpZHRoOjJweAogICAgc3R5bGUgRCBmaWxsOiNiYmYsc3Ryb2tlOiMzMzMsc3Ryb2tlLXdpZHRoOjJweAogICAgc3R5bGUgSCBmaWxsOiNiZmIsc3Ryb2tlOiMzMzMsc3Ryb2tlLXdpZHRoOjJweA==)
 
 ---
 
@@ -90,25 +75,25 @@ $$
 
 光说不练假把式。我们用两个真实案例，带你看看不同股权结构下的“护盘能力”差异。
 
-### 案例一：币认科技 (Biren) —— 坚不可摧的堡垒
+### 案例一：壁仞科技 —— 坚不可摧的堡垒
 
 这是典型的“高基石、高绿鞋”结构。
 
-![币认科技-初始股权结构金字塔](https://raw.githubusercontent.com/zzpwestlife/writing/main/articles/biren_stock/初始情况_金字塔.png)
+![壁仞科技-初始股权结构金字塔](https://raw.githubusercontent.com/zzpwestlife/writing/main/articles/biren_stock/初始情况_金字塔.png)
 *(图注：金字塔底座巨大，顶部才是流通盘)*
 
-#### 📊 核心数据拆解
+#### 📊 核心数据拆解 (初始状态)
 | 项目 | 占比 (of Total) | 备注 |
 | :--- | :---: | :--- |
-| **非上市股份** | **86.57%** | 存量不动 |
-| **发售规模** | **11.68%** | 看着不少，但... |
-| **(-) 基石投资者** | **6.07%** | **一半以上被锁住了！** |
-| **(=) 实际流通盘** | **5.61%** | 真正的抛压来源 |
-| **(+) 绿鞋** | **1.75%** | 护盘子弹 |
+| **非上市股份** | **89.50%** | 存量不动 (37.02% + 52.48%) |
+| **发售规模** | **10.50%** | 基础发行量 |
+| **(-) 基石投资者** | **5.45%** | 锁定，不流通 |
+| **(=) 初始流通盘** | **5.05%** | 真正的抛压来源 |
+| **(+) 绿鞋期权** | **1.58%** | 尚未行使 (15% of Offer) |
 
 #### 🧮 它的护盘能力有多强？
 
-![币认科技-绿鞋覆盖率可视化](https://raw.githubusercontent.com/zzpwestlife/writing/main/articles/biren_stock/上市后绿鞋被行使.png)
+![壁仞科技-绿鞋覆盖率可视化](https://raw.githubusercontent.com/zzpwestlife/writing/main/articles/biren_stock/上市后绿鞋被行使.png)
 
 看这张饼图：**红色的绿鞋** vs **绿色的流通盘**。
 
@@ -120,28 +105,32 @@ $$
 
 ---
 
-### 案例二：鸣鸣很忙 (Mingming) —— 另一种博弈
+### 案例二：鸣鸣很忙 —— 另一种博弈
 
 我们再来看看“鸣鸣很忙”。由于它行使了发售量调整权，结构略有不同。
 
 ![鸣鸣很忙-初始股权结构金字塔](https://raw.githubusercontent.com/zzpwestlife/writing/main/articles/mingming_stock/初始情况_金字塔.png)
 
-#### 📊 核心数据拆解
-| 项目 | 占比 | 备注 |
+#### 📊 核心数据拆解 (初始状态)
+| 项目 | 占比 (of Total) | 备注 |
 | :--- | :---: | :--- |
-| **基石投资者** | **2.98%** | 占比约40%，低于币认 |
-| **实际流通盘** | **4.44%** | 抛压相对较大 |
+| **非上市股份** | **93.42%** | 存量不动 |
+| **发售规模** | **6.58%** | 基础发行量 (未行使调整权) |
+| **(-) 基石投资者** | **3.04%** | 锁定，不流通 |
+| **(=) 实际流通盘** | **3.54%** | 抛压相对较大 |
+| **(+) 绿鞋期权** | **0.99%** | 尚未行使 (15% of Offer) |
 
 #### 🧮 它的护盘能力如何？
 
 ![鸣鸣很忙-绿鞋覆盖率可视化](https://raw.githubusercontent.com/zzpwestlife/writing/main/articles/mingming_stock/上市后绿鞋被行使.png)
 
 $$
-\text{绿鞋覆盖率} \approx \mathbf{23.99\%}
+\text{绿鞋覆盖率} \approx \mathbf{27.90\%}
 $$
 
 **对比**：
-虽然 **24%** 的覆盖率低于币认的 **31%**，但依然处于 **20%的安全线**之上。这意味着保荐人仍有能力吸收接近四分之一的市场抛压，安全垫依然够厚。
+虽然 **27.9%** 的覆盖率低于壁仞的 **31%**，但依然处于 **20%的安全线**之上。这意味着保荐人仍有能力吸收接近三成的市场抛压，安全垫依然够厚。
+*(注：若行使发售量调整权，发行规模扩大，绿鞋覆盖率通常会略微稀释，但仍在安全区间)*
 
 ---
 
