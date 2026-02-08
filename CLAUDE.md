@@ -30,6 +30,7 @@
 - **文档编写**: 调用 `code-scribe` 子代理。
 - **安全审查**: 调用 `security-auditor` 子代理。
 - **测试验证**: 调用 `test-validator` 子代理。
+- **公众号写作**: 调用 `wechat-writer` 子代理。
 
 ## 钩子配置（Hooks）
 ### Go 项目
